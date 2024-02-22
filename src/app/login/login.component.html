@@ -1,1 +1,28 @@
-login component
+<form data-cy="login-form" (ngSubmit)="logIn(form.value)" [formGroup]="form" class="login-form">
+
+  <mat-form-field color="primary" appearance="fill">
+    <mat-label>Login</mat-label>
+    <input class="input" data-cy="login-input" formControlName="username" matInput />
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input class="input" data-cy="password-input" formControlName="password" matInput
+      [type]="hidePassword() ? 'password' : 'text'" />
+    <mat-icon class="hide-password-icon" matSuffix (click)="hidePassword.set(!hidePassword())">
+      {{ hidePassword() ? "visibility_off" : "visibility" }}
+    </mat-icon>
+  </mat-form-field>
+
+  <mat-error data-cy="error" class="error-wrapper">
+    <ng-container *ngIf="form.hasError('invalidCredentials')">
+      Wrong credentials!
+    </ng-container>
+  </mat-error>
+
+  <button data-cy="login-button" type="submit" mat-raised-button color="primary">
+    Log in
+  </button>
+
+</form>
