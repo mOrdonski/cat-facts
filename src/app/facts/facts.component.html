@@ -1,1 +1,18 @@
-facts component
+<cdk-virtual-scroll-viewport data-cy="viewport" [itemSize]="itemSize" class="viewport">
+  <div data-cy="item" *cdkVirtualFor="let fact of facts$ | async" class="item">
+    <p class="fact-text">{{fact}}</p>
+  </div>
+  <div class="next-fact">
+    <ng-container *ngIf="loading$ | async">
+      <mat-spinner data-cy="spinner" />
+      <p>Next fact is loading...</p>
+    </ng-container>
+    <ng-container *ngIf="hasEnded$ | async">
+      <p>That's all for now</p>
+    </ng-container>
+  </div>
+</cdk-virtual-scroll-viewport>
+
+<ng-container *ngIf="fetchFact$ | async" />
+<ng-container *ngIf="fetchInitialFacts$ | async" />
+<ng-container *ngIf="scrollDispatcher$ | async" />
