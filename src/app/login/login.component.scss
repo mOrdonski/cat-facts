@@ -1,5 +1,6 @@
 mat-form-field {
   width: 20%;
+  min-width: 250px;
 }
 
 .login-form {
@@ -17,8 +18,4 @@ mat-form-field {
 
 .hide-password-icon {
   cursor: pointer;
-}
-
-mat-form-field {
-  min-width: 250px;
 }
