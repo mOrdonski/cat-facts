@@ -1,3 +1,7 @@
+# Deploy
+
+You can visit the app on https://cat-facts-664fa.web.app/facts
+
 # CatFacts
 
 Take a look at funny cats facts!
