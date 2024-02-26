@@ -19,4 +19,8 @@ export class AuthService {
     this.isAuthenticated = true;
     return true;
   }
+
+  logout(): void {
+    this.isAuthenticated = false;
+  }
 }
