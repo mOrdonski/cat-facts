@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -33,7 +32,7 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
 
@@ -42,10 +41,6 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
-
-  ngOnInit(): void {
-    this.authService.isAuthenticated = false;
-  }
 
   logIn({ username, password }: User): void {
     const isAuthenticated: boolean = this.authService.authenticate(

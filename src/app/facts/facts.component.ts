@@ -11,6 +11,7 @@ import {
   Component,
   HostListener,
   inject,
+  OnDestroy,
   ViewChild,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
@@ -29,6 +30,7 @@ import {
 
 import { config } from '../shared/config';
 import { Fact } from '../shared/interfaces/fact.interface';
+import { AuthService } from '../shared/services/auth.service';
 import { FactService } from '../shared/services/fact.service';
 
 @Component({
@@ -44,10 +46,11 @@ import { FactService } from '../shared/services/fact.service';
   styleUrls: ['./facts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FactsComponent {
+export class FactsComponent implements OnDestroy {
   private readonly factService = inject(FactService);
   private readonly scrollDispatcher = inject(ScrollDispatcher);
-  private readonly cdRef = inject(ChangeDetectorRef);
+  private readonly authService = inject(AuthService);
+  cdRef = inject(ChangeDetectorRef);
 
   @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
   @HostListener('window:resize', ['$event'])
@@ -59,6 +62,10 @@ export class FactsComponent {
 
   constructor() {
     this.getScreenSize();
+  }
+
+  ngOnDestroy(): void {
+    this.authService.logout();
   }
 
   itemSize = config.itemSize;
